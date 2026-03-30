@@ -18,7 +18,7 @@ header h1 { font-size: 3rem; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
 header p { font-size: 1.2rem; text-shadow: 1px 1px 5px rgba(0,0,0,0.3); }
 
 .ling-container {
-    margin: 30px 0;
+    margin: 30px auto;
     width: 250px;
     height: 250px;
     position: relative;
@@ -75,7 +75,7 @@ footer { text-align: center; margin-top: 50px; opacity: 0.8; }
 
 <header>
 <h1>SahRul AI Galeri Video</h1>
-<p>Taruh semua file <strong>videoX.mp4</strong> & <strong>thumbnailX.jpg</strong> di folder ini, website otomatis menampilkan semua video!</p>
+<p>Upload video baru + thumbnail, website otomatis menampilkan semua video!</p>
 </header>
 
 <!-- AdSense atas header -->
@@ -93,9 +93,7 @@ footer { text-align: center; margin-top: 50px; opacity: 0.8; }
 </div>
 
 <!-- Galeri video otomatis -->
-<div class="video-gallery" id="videoGallery">
-    <!-- Video akan otomatis dimasukkan melalui JS -->
-</div>
+<div class="video-gallery" id="videoGallery"></div>
 
 <!-- AdSense bawah galeri -->
 <div class="ad-container">
@@ -120,29 +118,31 @@ document.addEventListener('mousemove', e => {
     ling.style.transform = `translate(${x}px, ${y}px)`;
 });
 
-// Galeri drag & drop otomatis
+// Galeri otomatis dari videos.json
 const videoGallery = document.getElementById('videoGallery');
+fetch('https://zoltan28.github.io/AI-sahrul/videos.json')
+.then(res => res.json())
+.then(videos => {
+    videos.forEach(v => {
+        const videoEl = document.createElement('video');
+        videoEl.src = v.src;
+        videoEl.poster = v.poster || '';
+        videoEl.muted = true;
+        videoEl.playsInline = true;
+        videoEl.controls = true;
+        videoGallery.appendChild(videoEl);
 
-// Misal kamu punya video: video1.mp4, video2.mp4 ... thumbnail1.jpg, thumbnail2.jpg ...
-const totalVideos = 5; // Ganti sesuai jumlah videomu
-for(let i=1;i<=totalVideos;i++){
-    const videoEl = document.createElement('video');
-    videoEl.src = `video${i}.mp4`;
-    videoEl.poster = `thumbnail${i}.jpg`;
-    videoEl.muted = true;
-    videoEl.playsInline = true;
-    videoEl.controls = true;
-    videoGallery.appendChild(videoEl);
-
-    // autoplay saat scroll
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting){ videoEl.play(); }
-            else { videoEl.pause(); }
-        });
-    }, {threshold:0.5});
-    observer.observe(videoEl);
-}
+        // autoplay saat scroll
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting){ videoEl.play(); }
+                else { videoEl.pause(); }
+            });
+        }, {threshold:0.5});
+        observer.observe(videoEl);
+    });
+})
+.catch(err => console.error('Gagal memuat video JSON:', err));
 
 // AdSense muncul dinamis saat scroll
 const ads = document.querySelectorAll('.ad-container');
