@@ -1,27 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<title>Akses Premium</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akses Premium Sahrul</title>
+<style>
+body { font-family: Arial; text-align:center; background:#0f172a; color:white; }
+input { padding:10px; border-radius:8px; border:none; margin-top:10px; }
+.btn { padding:12px 25px; background:#22c55e; border-radius:30px; color:white; text-decoration:none; margin-top:15px; display:inline-block; }
+.container { padding:40px; }
+img.qris { width:260px; border-radius:15px; margin-top:10px; box-shadow:0 0 20px rgba(0,0,0,0.5); }
+</style>
 </head>
 <body>
-<h1>Scan & Bayar</h1>
-<img src="qris.png">
+<div class="container">
+<h1>🔥 Akses Konten Premium</h1>
+
+<h3>💳 Scan QRIS untuk Bayar</h3>
+<img src="qris.png" alt="QRIS" class="qris">
+<p>✔ Scan → Bayar → Masukkan kode</p>
+
+<h3>💌 Masukkan Email untuk Kode Akses:</h3>
+<input type="email" id="email" placeholder="Email kamu">
 <br>
-<input type="text" id="nomor" placeholder="Masukkan WA">
-<button onclick="getKode()">Dapatkan Kode</button>
-<p id="info"></p>
+<button class="btn" onclick="generateKode()">Dapatkan Kode</button>
+
+<div id="msg" style="margin-top:20px;"></div>
+
+<h3>🔐 Masukkan Kode Akses:</h3>
+<input type="text" id="kode" placeholder="Masukkan kode">
+<br>
+<button class="btn" onclick="verifyKode()">Buka Akses</button>
 
 <script>
-async function getKode() {
-  const nomor = document.getElementById("nomor").value;
+async function generateKode() {
+  const email = document.getElementById("email").value;
   const res = await fetch("https://backend-sahrul-production.up.railway.app/generate-code", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ nomor })
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({ email })
   });
   const data = await res.json();
-  document.getElementById("info").innerText = data.success ? "Kode dikirim!" : "Error!";
+  document.getElementById("msg").innerText = data.success ? data.message : data.message;
+}
+
+async function verifyKode() {
+  const kode = document.getElementById("kode").value;
+  const token = Object.keys(localStorage)[0] || "demo-token";
+  const res = await fetch("https://backend-sahrul-production.up.railway.app/verify", {
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({ token, kode })
+  });
+  const data = await res.json();
+  if(data.success) window.location.href = data.redirect;
+  else alert("Kode salah atau belum bayar!");
 }
 </script>
+</div>
 </body>
 </html>
