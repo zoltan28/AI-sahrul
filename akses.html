@@ -1,26 +1,18 @@
 <!DOCTYPE html>
 <html>
 <body>
-
-<h2>🔐 Memverifikasi...</h2>
+<h1>Akses Premium</h1>
+<input type="text" id="kode" placeholder="Masukkan Kode">
+<button onclick="cek()">Buka</button>
 
 <script>
 async function cek() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const token = urlParams.get("token");
-
-  let res = await fetch("https://BACKEND_URL/verify?token=" + token);
-  let data = await res.json();
-
-  if(data.success){
-    window.location.href = data.redirect;
-  } else {
-    document.body.innerHTML = "<h2>❌ Akses ditolak</h2>";
-  }
+  const k = document.getElementById("kode").value;
+  const res = await fetch(`https://backend-sahrul-production.up.railway.app/verify?kode=${k}`);
+  const data = await res.json();
+  if (data.success) window.location.href = data.redirect;
+  else alert("Kode salah!");
 }
-
-cek();
 </script>
-
 </body>
 </html>
