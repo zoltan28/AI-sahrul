@@ -1,62 +1,97 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Akses Premium Sahrul</title>
-<style>
-body { font-family: Arial; text-align:center; background:#0f172a; color:white; }
-input { padding:10px; border-radius:8px; border:none; margin-top:10px; }
-.btn { padding:12px 25px; background:#22c55e; border-radius:30px; color:white; text-decoration:none; margin-top:15px; display:inline-block; }
-.container { padding:40px; }
-img.qris { width:260px; border-radius:15px; margin-top:10px; box-shadow:0 0 20px rgba(0,0,0,0.5); }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Profesional Ling</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: #fff;
+            padding: 20px;
+        }
+        header { text-align: center; margin-bottom: 20px; }
+        header h1 { font-size: 3rem; margin-bottom: 10px; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
+        header p { font-size: 1.2rem; text-shadow: 1px 1px 5px rgba(0,0,0,0.3); }
+
+        .ling-container { margin: 30px 0; }
+        .ling-container img {
+            width: 250px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 20px;
+        }
+        .ling-container img:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .whatsapp-button:hover { transform: scale(1.1); box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
+        .whatsapp-button img { width: 30px; }
+
+        .ad-container { margin: 20px 0; display: flex; justify-content: center; }
+        footer { margin-top: 50px; font-size: 0.9rem; opacity: 0.8; }
+    </style>
 </head>
 <body>
-<div class="container">
-<h1>🔥 Akses Konten Premium</h1>
 
-<h3>💳 Scan QRIS untuk Bayar</h3>
-<img src="qris.png" alt="QRIS" class="qris">
-<p>✔ Scan → Bayar → Masukkan kode</p>
+    <header>
+        <h1>Selamat Datang di Website SahRul AI</h1>
+        <p>Klik gambar  untuk masuk group langsung di WhatsApp gratis!</p>
+    </header>
 
-<h3>💌 Masukkan Email untuk Kode Akses:</h3>
-<input type="email" id="email" placeholder="Email kamu">
-<br>
-<button class="btn" onclick="generateKode()">Dapatkan Kode</button>
+    <!-- AdSense Banner -->
+    <div class="ad-container">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1087445671304236"
+             crossorigin="anonymous"></script>
+        <!-- Sahrul -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-1087445671304236"
+             data-ad-slot="4169370015"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
 
-<div id="msg" style="margin-top:20px;"></div>
+    <div class="ling-container">
+        <a href="https://wa.me/6285736147554" target="_blank">
+            <img src="https://i.ibb.co/5Bf6MZL/ling.png" alt="Ling Character">
+        </a>
+    </div>
 
-<h3>🔐 Masukkan Kode Akses:</h3>
-<input type="text" id="kode" placeholder="Masukkan kode">
-<br>
-<button class="btn" onclick="verifyKode()">Buka Akses</button>
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/6285736147554" target="_blank" class="whatsapp-button">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
 
-<script>
-async function generateKode() {
-  const email = document.getElementById("email").value;
-  const res = await fetch("https://backend-sahrul-production.up.railway.app/generate-code", {
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body: JSON.stringify({ email })
-  });
-  const data = await res.json();
-  document.getElementById("msg").innerText = data.success ? data.message : data.message;
-}
+    <footer>
+        &copy; 2026 Ling Website. All rights reserved.
+    </footer>
 
-async function verifyKode() {
-  const kode = document.getElementById("kode").value;
-  const token = Object.keys(localStorage)[0] || "demo-token";
-  const res = await fetch("https://backend-sahrul-production.up.railway.app/verify", {
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body: JSON.stringify({ token, kode })
-  });
-  const data = await res.json();
-  if(data.success) window.location.href = data.redirect;
-  else alert("Kode salah atau belum bayar!");
-}
-</script>
-</div>
 </body>
 </html>
