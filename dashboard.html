@@ -1,11 +1,15 @@
-<h2>📊 Data Pembeli</h2>
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Dashboard Pembeli</h1>
 <pre id="data"></pre>
 
 <script>
-fetch("https://BACKEND_URL/dashboard")
+fetch("https://backend-sahrul-production.up.railway.app/dashboard")
 .then(res => res.json())
-.then(data => {
-  document.getElementById("data").innerText =
-    JSON.stringify(data, null, 2);
+.then(js => {
+  document.getElementById("data").textContent = JSON.stringify(js,null,2);
 });
 </script>
+</body>
+</html>
