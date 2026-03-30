@@ -35,6 +35,8 @@ h1 {
   margin-top: 15px;
   text-decoration: none;
   color: white;
+  border: none;
+  cursor: pointer;
 }
 
 .box {
@@ -42,13 +44,6 @@ h1 {
   background: rgba(255,255,255,0.05);
   padding: 25px;
   border-radius: 15px;
-}
-
-input {
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  margin-top: 10px;
 }
 
 .timer {
@@ -64,23 +59,15 @@ input {
 </style>
 
 <script>
-function cekKode() {
-  let kode = document.getElementById("kode").value;
+// 🔥 CONNECT BACKEND (WAJIB GANTI URL)
+async function bayar() {
+  let res = await fetch("https://backend-sahrul.up.railway.app/create-payment");
+  let data = await res.json();
 
-  if(kode === "VIP2026" || kode === "SAHRUL999") {
-    localStorage.setItem("akses", "true");
-    window.location.href = "https://opal.google/edit/1wuXkQDE_gPxDu6hQ3B0HKfastyudW4BU"; // 🔥 GANTI LINK ASLI
-  } else {
-    alert("❌ Kode salah atau belum bayar!");
-  }
+  window.location.href = data.paymentUrl;
 }
 
-window.onload = function() {
-  if(localStorage.getItem("akses") === "true") {
-    window.location.href = "https://opal.google/edit/1wuXkQDE_gPxDu6hQ3B0HKfastyudW4BU"; // 🔥 GANTI LINK ASLI
-  }
-}
-
+// countdown
 let time = 300;
 setInterval(()=>{
   let m = Math.floor(time/60);
@@ -100,19 +87,20 @@ setInterval(()=>{
 <h1>🔥 Akses Konten Premium</h1>
 <p>Rahasia yang tidak dibagikan gratis</p>
 
-<!-- 🔥 QRIS GAMBAR -->
-<div style="margin-top:20px;">
-  <h3>💳 Scan QRIS untuk Bayar</h3>
+<!-- 🔥 TOMBOL AUTO QRIS -->
+<button onclick="bayar()" class="btn">
+🔒 Bayar Sekarang (QRIS Otomatis)
+</button>
 
-  <img src="qris.png" alt="QRIS Payment"
+<!-- 🔥 QRIS GAMBAR (CADANGAN) -->
+<div style="margin-top:20px;">
+  <h3>💳 Atau Scan QRIS Manual</h3>
+
+  <img src="qris.png"
        style="width:260px;border-radius:15px;margin-top:10px;box-shadow:0 0 20px rgba(0,0,0,0.5);">
 
   <p style="margin-top:10px;color:#22c55e;">
-    ✔ Scan → Bayar → Masukkan kode
-  </p>
-
-  <p style="font-size:13px;opacity:0.6;">
-    Akses diberikan setelah pembayaran
+    ✔ Pembayaran otomatis lebih cepat via tombol
   </p>
 </div>
 
@@ -125,16 +113,17 @@ setInterval(()=>{
      data-full-width-responsive="true"></ins>
 
 <script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
+(adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 
 <div id="timer" class="timer"></div>
 
+<!-- INFO -->
 <div class="box">
-<h3>🔐 Masukkan Kode Akses</h3>
-<input type="text" id="kode" placeholder="Masukkan kode premium">
-<br>
-<button onclick="cekKode()" class="btn">Buka Akses</button>
+<h3>⚡ Cara Akses</h3>
+<p>1. Klik bayar</p>
+<p>2. Selesaikan pembayaran</p>
+<p>3. Akses otomatis terbuka</p>
 </div>
 
 <!-- 🔥 IKLAN 2 -->
@@ -146,13 +135,13 @@ setInterval(()=>{
      data-full-width-responsive="true"></ins>
 
 <script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
+(adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 
 <div class="testimoni">
 <p>🔥 “Baru coba langsung berhasil!”</p>
 <p>💰 “Worth it banget, gak nyesel beli!”</p>
-<p>⚡ “Linknya legit, langsung jalan!”</p>
+<p>⚡ “Langsung kebuka setelah bayar!”</p>
 </div>
 
 </div>
