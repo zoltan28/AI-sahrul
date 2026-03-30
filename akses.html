@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>🔐 Memverifikasi...</h2>
+
+<script>
+async function cek() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const token = urlParams.get("token");
+
+  let res = await fetch("https://BACKEND_URL/verify?token=" + token);
+  let data = await res.json();
+
+  if(data.success){
+    window.location.href = data.redirect;
+  } else {
+    document.body.innerHTML = "<h2>❌ Akses ditolak</h2>";
+  }
+}
+
+cek();
+</script>
+
+</body>
+</html>
