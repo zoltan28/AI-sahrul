@@ -1,0 +1,11 @@
+<h2>📊 Data Pembeli</h2>
+<pre id="data"></pre>
+
+<script>
+fetch("https://BACKEND_URL/dashboard")
+.then(res => res.json())
+.then(data => {
+  document.getElementById("data").innerText =
+    JSON.stringify(data, null, 2);
+});
+</script>
