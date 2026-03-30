@@ -1,150 +1,27 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Akses Premium Sahrul</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
-
-<!-- ADSENSE -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1087445671304236"
-     crossorigin="anonymous"></script>
-
-<style>
-body {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg,#020617,#0f172a);
-  color: white;
-  text-align: center;
-}
-
-.container {
-  padding: 40px 20px;
-}
-
-h1 {
-  font-size: 32px;
-}
-
-.btn {
-  display: inline-block;
-  padding: 14px 28px;
-  background: #22c55e;
-  border-radius: 30px;
-  margin-top: 15px;
-  text-decoration: none;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.box {
-  margin-top: 30px;
-  background: rgba(255,255,255,0.05);
-  padding: 25px;
-  border-radius: 15px;
-}
-
-.timer {
-  color: #facc15;
-  margin-top: 10px;
-}
-
-.testimoni {
-  margin-top: 30px;
-  font-size: 14px;
-  opacity: 0.8;
-}
-</style>
-
-<script>
-// 🔥 CONNECT BACKEND (WAJIB GANTI URL)
-async function bayar() {
-  let res = await fetch("https://backend-sahrul.up.railway.app/create-payment");
-  let data = await res.json();
-
-  window.location.href = data.paymentUrl;
-}
-
-// countdown
-let time = 300;
-setInterval(()=>{
-  let m = Math.floor(time/60);
-  let s = time%60;
-  document.getElementById("timer").innerText =
-    "Promo berakhir dalam: " + m + ":" + (s<10?"0":"") + s;
-  time--;
-},1000);
-</script>
-
+<title>Akses Premium</title>
 </head>
-
 <body>
-
-<div class="container">
-
-<h1>🔥 Akses Konten Premium</h1>
-<p>Rahasia yang tidak dibagikan gratis</p>
-
-<!-- 🔥 TOMBOL AUTO QRIS -->
-<button onclick="bayar()" class="btn">
-🔒 Bayar Sekarang (QRIS Otomatis)
-</button>
-
-<!-- 🔥 QRIS GAMBAR (CADANGAN) -->
-<div style="margin-top:20px;">
-  <h3>💳 Atau Scan QRIS Manual</h3>
-
-  <img src="qris.png"
-       style="width:260px;border-radius:15px;margin-top:10px;box-shadow:0 0 20px rgba(0,0,0,0.5);">
-
-  <p style="margin-top:10px;color:#22c55e;">
-    ✔ Pembayaran otomatis lebih cepat via tombol
-  </p>
-</div>
-
-<!-- 🔥 IKLAN 1 -->
-<ins class="adsbygoogle"
-     style="display:block;margin-top:20px"
-     data-ad-client="ca-pub-1087445671304236"
-     data-ad-slot="1234567890"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
+<h1>Scan & Bayar</h1>
+<img src="qris.png">
+<br>
+<input type="text" id="nomor" placeholder="Masukkan WA">
+<button onclick="getKode()">Dapatkan Kode</button>
+<p id="info"></p>
 
 <script>
-(adsbygoogle = window.adsbygoogle || []).push({});
+async function getKode() {
+  const nomor = document.getElementById("nomor").value;
+  const res = await fetch("https://backend-sahrul-production.up.railway.app/generate-code", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ nomor })
+  });
+  const data = await res.json();
+  document.getElementById("info").innerText = data.success ? "Kode dikirim!" : "Error!";
+}
 </script>
-
-<div id="timer" class="timer"></div>
-
-<!-- INFO -->
-<div class="box">
-<h3>⚡ Cara Akses</h3>
-<p>1. Klik bayar</p>
-<p>2. Selesaikan pembayaran</p>
-<p>3. Akses otomatis terbuka</p>
-</div>
-
-<!-- 🔥 IKLAN 2 -->
-<ins class="adsbygoogle"
-     style="display:block;margin-top:20px"
-     data-ad-client="ca-pub-1087445671304236"
-     data-ad-slot="1234567890"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-<div class="testimoni">
-<p>🔥 “Baru coba langsung berhasil!”</p>
-<p>💰 “Worth it banget, gak nyesel beli!”</p>
-<p>⚡ “Langsung kebuka setelah bayar!”</p>
-</div>
-
-</div>
-
 </body>
 </html>
