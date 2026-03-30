@@ -35,7 +35,7 @@ header p { font-size: 1.2rem; text-shadow: 1px 1px 5px rgba(0,0,0,0.3); }
 .featured-video {
     width: 100%;
     max-width: 900px;
-    margin: 0 auto 40px auto;
+    margin: 0 auto 20px auto;
     border-radius: 20px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.6);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -43,6 +43,13 @@ header p { font-size: 1.2rem; text-shadow: 1px 1px 5px rgba(0,0,0,0.3); }
 .featured-video:hover { 
     transform: scale(1.02); 
     box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+}
+#unmuteBtn {
+    position:absolute; bottom:15px; right:15px;
+    padding:8px 12px; font-size:14px;
+    border:none; border-radius:8px;
+    background-color:rgba(0,0,0,0.6); color:#fff;
+    cursor:pointer; transition:0.3s;
 }
 
 /* Galeri video grid */
@@ -59,17 +66,10 @@ header p { font-size: 1.2rem; text-shadow: 1px 1px 5px rgba(0,0,0,0.3); }
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     transition: transform 0.2s ease;
 }
-.video-gallery video:hover {
-    transform: scale(1.03);
-}
+.video-gallery video:hover { transform: scale(1.03); }
 
 /* AdSense container */
-.ad-container {
-    margin: 30px 0;
-    display: flex;
-    justify-content: center;
-    min-height: 100px;
-}
+.ad-container { margin: 30px 0; display: flex; justify-content: center; min-height: 100px; }
 
 /* WhatsApp floating */
 .whatsapp-button {
@@ -115,8 +115,9 @@ footer { text-align: center; margin-top: 50px; opacity: 0.8; }
 </div>
 
 <!-- Video utama featured -->
-<div id="featuredContainer" style="text-align:center; margin-bottom:40px;">
-    <video id="featuredVideo" class="featured-video" muted playsinline controls></video>
+<div id="featuredContainer" style="text-align:center; margin-bottom:40px; position:relative;">
+    <video id="featuredVideo" class="featured-video" muted playsinline controls autoplay></video>
+    <button id="unmuteBtn">Unmute</button>
 </div>
 
 <!-- Galeri video otomatis -->
@@ -148,14 +149,23 @@ document.addEventListener('mousemove', e => {
 // Galeri otomatis dari videos.json
 const videoGallery = document.getElementById('videoGallery');
 const featuredVideo = document.getElementById('featuredVideo');
+const unmuteBtn = document.getElementById('unmuteBtn');
 
 fetch('https://zoltan28.github.io/AI-sahrul/videos.json')
 .then(res => res.json())
 .then(videos => {
     if(videos.length > 0){
-        // Set video pertama sebagai featured
+        // Featured video
         featuredVideo.src = videos[0].src;
         featuredVideo.poster = videos[0].poster || '';
+        featuredVideo.play(); // autoplay muted
+
+        // Unmute button
+        unmuteBtn.addEventListener('click', () => {
+            featuredVideo.muted = false;
+            featuredVideo.play();
+            unmuteBtn.style.display = 'none';
+        });
     }
 
     // Masukkan semua video ke grid (kecuali featured)
