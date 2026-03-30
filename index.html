@@ -1,126 +1,161 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sahrul Official</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akses Premium Sahrul</title>
 
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
+<!-- ADSENSE -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1087445671304236"
+     crossorigin="anonymous"></script>
 
-    body {
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: white;
-      text-align: center;
-    }
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg,#020617,#0f172a);
+  color: white;
+  text-align: center;
+}
 
-    header {
-      padding: 20px;
-      font-size: 20px;
-      font-weight: bold;
-    }
+.container {
+  padding: 40px 20px;
+}
 
-    .hero {
-      padding: 80px 20px;
-    }
+h1 {
+  font-size: 32px;
+}
 
-    .hero h1 {
-      font-size: 40px;
-      margin-bottom: 15px;
-    }
+.btn {
+  display: inline-block;
+  padding: 14px 28px;
+  background: #22c55e;
+  border-radius: 30px;
+  margin-top: 15px;
+  text-decoration: none;
+  color: white;
+}
 
-    .hero p {
-      opacity: 0.8;
-      margin-bottom: 25px;
-    }
+.box {
+  margin-top: 30px;
+  background: rgba(255,255,255,0.05);
+  padding: 25px;
+  border-radius: 15px;
+}
 
-    .btn {
-      display: inline-block;
-      padding: 12px 25px;
-      background: #22c55e;
-      color: white;
-      border-radius: 30px;
-      text-decoration: none;
-      transition: 0.3s;
-    }
+input {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  margin-top: 10px;
+}
 
-    .btn:hover {
-      background: #16a34a;
-      transform: scale(1.05);
-    }
+.timer {
+  color: #facc15;
+  margin-top: 10px;
+}
 
-    .section {
-      padding: 50px 20px;
-    }
+.testimoni {
+  margin-top: 30px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+</style>
 
-    .card {
-      background: rgba(255,255,255,0.05);
-      margin: 15px;
-      padding: 20px;
-      border-radius: 15px;
-      display: inline-block;
-      width: 250px;
-      transition: 0.3s;
-    }
+<script>
+function cekKode() {
+  let kode = document.getElementById("kode").value;
 
-    .card:hover {
-      transform: translateY(-10px);
-      background: rgba(255,255,255,0.1);
-    }
+  if(kode === "VIP2026" || kode === "SAHRUL999") {
+    localStorage.setItem("akses", "true");
+    window.location.href = "https://opal.google/edit/1wuXkQDE_gPxDu6hQ3B0HKfastyudW4BU"; // 🔥 GANTI LINK ASLI
+  } else {
+    alert("❌ Kode salah atau belum bayar!");
+  }
+}
 
-    footer {
-      margin-top: 40px;
-      padding: 20px;
-      font-size: 14px;
-      opacity: 0.6;
-    }
-  </style>
+window.onload = function() {
+  if(localStorage.getItem("akses") === "true") {
+    window.location.href = "https://opal.google/edit/1wuXkQDE_gPxDu6hQ3B0HKfastyudW4BU"; // 🔥 GANTI LINK ASLI
+  }
+}
+
+let time = 300;
+setInterval(()=>{
+  let m = Math.floor(time/60);
+  let s = time%60;
+  document.getElementById("timer").innerText =
+    "Promo berakhir dalam: " + m + ":" + (s<10?"0":"") + s;
+  time--;
+},1000);
+</script>
+
 </head>
 
 <body>
 
-<header>
-  🚀 Sahrul Official
-</header>
+<div class="container">
 
-<section class="hero">
-  <h1>Website Keren & Profesional</h1>
-  <p>Buat pengunjung tertarik dan klik link kamu 🔥</p>
-  
-  <!-- GANTI LINK INI -->
-  <a href="https://google.com" class="btn">Klik Disini</a>
-</section>
+<h1>🔥 Akses Konten Premium</h1>
+<p>Rahasia yang tidak dibagikan gratis</p>
 
-<section class="section">
-  <h2>Kenapa Harus Disini?</h2>
+<!-- 🔥 QRIS GAMBAR -->
+<div style="margin-top:20px;">
+  <h3>💳 Scan QRIS untuk Bayar</h3>
 
-  <div class="card">
-    <h3>🔥 Cepat</h3>
-    <p>Website ringan & cepat dibuka</p>
-  </div>
+  <img src="qris.png" alt="QRIS Payment"
+       style="width:260px;border-radius:15px;margin-top:10px;box-shadow:0 0 20px rgba(0,0,0,0.5);">
 
-  <div class="card">
-    <h3>💰 Menghasilkan</h3>
-    <p>Bisa untuk promosi & cuan</p>
-  </div>
+  <p style="margin-top:10px;color:#22c55e;">
+    ✔ Scan → Bayar → Masukkan kode
+  </p>
 
-  <div class="card">
-    <h3>🎯 Menarik</h3>
-    <p>Desain modern bikin betah</p>
-  </div>
-</section>
+  <p style="font-size:13px;opacity:0.6;">
+    Akses diberikan setelah pembayaran
+  </p>
+</div>
 
-<footer>
-  © 2026 Sahrul - All Rights Reserved
-</footer>
+<!-- 🔥 IKLAN 1 -->
+<ins class="adsbygoogle"
+     style="display:block;margin-top:20px"
+     data-ad-client="ca-pub-1087445671304236"
+     data-ad-slot="1234567890"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<div id="timer" class="timer"></div>
+
+<div class="box">
+<h3>🔐 Masukkan Kode Akses</h3>
+<input type="text" id="kode" placeholder="Masukkan kode premium">
+<br>
+<button onclick="cekKode()" class="btn">Buka Akses</button>
+</div>
+
+<!-- 🔥 IKLAN 2 -->
+<ins class="adsbygoogle"
+     style="display:block;margin-top:20px"
+     data-ad-client="ca-pub-1087445671304236"
+     data-ad-slot="1234567890"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<div class="testimoni">
+<p>🔥 “Baru coba langsung berhasil!”</p>
+<p>💰 “Worth it banget, gak nyesel beli!”</p>
+<p>⚡ “Linknya legit, langsung jalan!”</p>
+</div>
+
+</div>
 
 </body>
 </html>
